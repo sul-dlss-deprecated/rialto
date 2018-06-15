@@ -1,4 +1,11 @@
-# RIALTO
-## RIALTO - Research Intelligence System
+# RIALTO - Research Intelligence System
 
-Note: This repo may not have code, but is used for issue tracking.
+## Front end
+You can run the front end by doing:
+
+```
+cd frontend
+yarn serve
+```
+
+See [the frontend readme](frontend/README.md) for details
