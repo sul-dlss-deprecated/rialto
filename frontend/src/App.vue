@@ -1,6 +1,8 @@
 <template>
   <div id="app">
-    <img src="./assets/logo.png">
+    <el-header>
+      <h1>RIALTO Research at Stanford</h1>
+    </el-header>
     <HelloWorld msg="Welcome to Your Vue.js App"/>
   </div>
 </template>
@@ -23,6 +25,5 @@ export default {
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
   color: #2c3e50;
-  margin-top: 60px;
 }
 </style>
