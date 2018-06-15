@@ -9,6 +9,8 @@
   },
   "dependencies": {
     "element-ui": "^2.4.1",
+    "node-sass": "^4.9.0",
+    "sass-loader": "^7.0.3",
     "vue": "^2.5.16"
   },
   "devDependencies": {

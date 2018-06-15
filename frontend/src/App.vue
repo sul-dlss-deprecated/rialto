@@ -1,5 +1,8 @@
 <template>
   <div id="app">
+    <nav>
+      <a href="https://library.stanford.edu"><img src="./assets/sul-logo.svg" alt="Stanford Libraries" height="25"></a>
+    </nav>
     <el-header>
       <h1>RIALTO Research at Stanford</h1>
     </el-header>
@@ -18,7 +21,7 @@ export default {
 }
 </script>
 
-<style>
+<style lang="scss">
 #app {
   font-family: 'Avenir', Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
@@ -26,4 +29,15 @@ export default {
   text-align: center;
   color: #2c3e50;
 }
+
+.el-header {
+  background-color: #8c1515;
+  color: white;
+  h1 {
+    line-height: 60px;
+    margin: 0;
+    padding: 0;
+  }
+}
+
 </style>
