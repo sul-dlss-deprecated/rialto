@@ -19,6 +19,7 @@ AWS_ACCESS_KEY_ID=999999 AWS_SECRET_ACCESS_KEY=1231 aws \
 --runtime go1.x \
 --role r1 \
 --handler main \
+--environment "Variables={ES_HOST=192.168.2.7}" \
 --zip-file fileb://lambda.zip
 ```
 
