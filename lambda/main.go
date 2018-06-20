@@ -23,7 +23,7 @@ func Handler(ctx context.Context, snsEvent events.SNSEvent) {
 	for _, record := range snsEvent.Records {
 		// snsRecord := record.SNS
 		// str = fmt.Sprintf("[%s %s] Message = %s \n", record.EventSource, snsRecord.Timestamp, snsRecord.Message)
-		message := fmt.Sprintf("{\"foo\": \"bar%s\"}", record.EventSource)
+		message := fmt.Sprintf("{\"foo\": \"bar%s\"}", record.SNS.Message)
 		reader := strings.NewReader(message)
 		resp, err := http.Post(url, "application/json", reader)
 		if err != nil {

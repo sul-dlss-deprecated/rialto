@@ -8,7 +8,7 @@ zip lambda.zip main
 
 1. Start localstack. If you're on a Mac, ensure you are running the docker daemon.
 ```
-SERVICES=lambda,es LAMBDA_EXECUTOR=docker localstack start
+SERVICES=lambda,es,sns LAMBDA_EXECUTOR=docker localstack start
 ```
 
 1. Upload zip and create a function definition
@@ -33,12 +33,24 @@ AWS_ACCESS_KEY_ID=999999 AWS_SECRET_ACCESS_KEY=1231 aws es \
 --ebs-options EBSEnabled=true,VolumeType=standard,VolumeSize=10
 ```
 
-1. Call the function
+1. Create the SNS Topic
 ```
-AWS_ACCESS_KEY_ID=999999 AWS_SECRET_ACCESS_KEY=1231 aws lambda \
---endpoint-url=http://localhost:4574 invoke \
---function-name f1 result.log \
---payload '{"Records": [{"EventSource": "foo", "Sns": { "Timestamp": "2014-05-16T08:28:06.801064-04:00", "Message": "Hello world!" }}]}'
+awslocal sns create-topic --name rialto-msg
+```
+
+1. Subscribe the lamba function to the SNS Topic
+```
+awslocal sns subscribe \
+  --topic-arn arn:aws:sns:us-east-1:123456789012:rialto-msg \
+  --protocol lambda \
+  --notification-endpoint arn:aws:lambda:localstack:000000000000:function:f1
+```
+
+1. Publish to the SNS Topic
+```
+awslocal sns publish \
+   --topic-arn arn:aws:sns:us-east-1:123456789012:rialto-msg \
+   --message 'Test Message!'
 ```
 
 1. View output
@@ -46,7 +58,7 @@ When you go to http://localhost:4571/records/_search
 
 You should see an item record with:
 ```
-"_source":{"foo": "barfoo"}
+"_source":{"foo": "bar -- Test Message!"}
 ```
 
 1. Cleanup
