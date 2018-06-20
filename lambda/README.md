@@ -13,12 +13,13 @@ SERVICES=lambda,es,sns LAMBDA_EXECUTOR=docker localstack start
 
 1. Upload zip and create a function definition
 ```
-AWS_REGION=localstack AWS_ACCESS_KEY_ID=999999 AWS_SECRET_ACCESS_KEY=1231 aws \
+AWS_ACCESS_KEY_ID=999999 AWS_SECRET_ACCESS_KEY=1231 aws \
 --endpoint-url http://localhost:4574 lambda create-function \
 --function-name f1 \
 --runtime go1.x \
 --role r1 \
 --handler main \
+--environment "Variables={ES_HOST=192.168.2.7}" \
 --zip-file fileb://lambda.zip
 ```
 
@@ -48,7 +49,7 @@ awslocal sns subscribe \
 1. Publish to the SNS Topic
 ```
 awslocal sns publish \
-   --topic-arn arn:aws:sns:us-east-1:123456789012:test-topic \
+   --topic-arn arn:aws:sns:us-east-1:123456789012:rialto-msg \
    --message 'Test Message!'
 ```
 
