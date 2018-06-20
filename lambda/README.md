@@ -8,7 +8,7 @@ zip lambda.zip main
 
 1. Start localstack. If you're on a Mac, ensure you are running the docker daemon.
 ```
-SERVICES=lambda,es LAMBDA_EXECUTOR=docker localstack start
+SERVICES=lambda,es,sns LAMBDA_EXECUTOR=docker localstack start
 ```
 
 1. Upload zip and create a function definition
@@ -33,12 +33,29 @@ AWS_ACCESS_KEY_ID=999999 AWS_SECRET_ACCESS_KEY=1231 aws es \
 --ebs-options EBSEnabled=true,VolumeType=standard,VolumeSize=10
 ```
 
-1. Call the function
+1. Create SNS topic
 ```
-AWS_ACCESS_KEY_ID=999999 AWS_SECRET_ACCESS_KEY=1231 aws lambda \
---endpoint-url=http://localhost:4574 invoke \
---function-name f1 result.log \
---payload '{"Records": [{"EventSource": "foo", "Sns": { "Timestamp": "2014-05-16T08:28:06.801064-04:00", "Message": "Hello world!" }}]}'
+AWS_ACCESS_KEY_ID=999999 AWS_SECRET_ACCESS_KEY=1231 aws sns \
+--endpoint-url=http://localhost:4575 create-topic \
+--name data-update
+```
+
+1. Subscribe to SNS events
+```
+AWS_ACCESS_KEY_ID=999999 AWS_SECRET_ACCESS_KEY=1231 aws sns \
+--endpoint-url=http://localhost:4575 subscribe \
+--topic-arn arn:aws:sns:us-east-1:123456789012:data-update \
+--protocol lambda \
+--notification-endpoint arn:aws:lambda:us-east-1:000000000000:function:f1
+```
+
+1. Publish a Message
+```
+AWS_ACCESS_KEY_ID=999999 AWS_SECRET_ACCESS_KEY=1231 aws sns \
+--endpoint-url=http://localhost:4575 publish \
+--topic-arn arn:aws:sns:us-east-1:123456789012:data-update \
+--message '{"Records": [{"EventSource": "foo", "Sns": { "Timestamp": "2014-05-16T08:28:06.801Z",
+"Message": "Hello world!" }}]}'
 ```
 
 1. View output
@@ -49,7 +66,7 @@ You should see an item record with:
 "_source":{"foo": "barfoo"}
 ```
 
-1. Cleanup
+1. Cleanup (necessary before you upload a newer version of the function)
 
 ```
 AWS_ACCESS_KEY_ID=999999 AWS_SECRET_ACCESS_KEY=1231 aws lambda \
