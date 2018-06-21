@@ -1,14 +1,21 @@
 # Running a lambda on localstack
 
+## Dependencies
+
+1. [Rialto-api / localstack](https://github.com/sul-dlss-labs/rialto-api/)
+
+## Create the lambda zip file, upload and subscribe
+
+```
+make
+```
+
+## Manually run the lambda setup
+
 1. Create a zip
 ```
 GOOS=linux go build -o main
 zip lambda.zip main
-```
-
-1. Start localstack. If you're on a Mac, ensure you are running the docker daemon.
-```
-SERVICES=lambda,es,sns LAMBDA_EXECUTOR=docker localstack start
 ```
 
 1. Upload zip and create a function definition
@@ -21,23 +28,6 @@ AWS_ACCESS_KEY_ID=999999 AWS_SECRET_ACCESS_KEY=1231 aws \
 --handler main \
 --environment "Variables={ES_HOST=192.168.2.7}" \
 --zip-file fileb://lambda.zip
-```
-
-1. Create ES domain
-```
-AWS_ACCESS_KEY_ID=999999 AWS_SECRET_ACCESS_KEY=1231 aws es \
---endpoint-url=http://localhost:4578 create-elasticsearch-domain \
---domain-name records \
---elasticsearch-version 6.2 \
---elasticsearch-cluster-config InstanceType=t2.small.elasticsearch,InstanceCount=1 \
---ebs-options EBSEnabled=true,VolumeType=standard,VolumeSize=10
-```
-
-1. Create SNS topic
-```
-AWS_ACCESS_KEY_ID=999999 AWS_SECRET_ACCESS_KEY=1231 aws sns \
---endpoint-url=http://localhost:4575 create-topic \
---name data-update
 ```
 
 1. Subscribe to SNS events
