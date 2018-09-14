@@ -1,0 +1,32 @@
+title: RIALTO Technical & Data Architecture
+logo: /assets/img/rialto_bridge_2011.jpg
+description:
+baseurl: "/rialto"
+url: "https://sul-dlss.github.io"
+show_downloads: true
+project_wiki: https://github.com/sul-dlss/rialto/wiki
+project_issues: https://github.com/sul-dlss/rialto/issues
+
+# Build settings
+markdown: kramdown
+remote_theme: cmh2166/minimal-architect
+plugins:
+  - jekyll-feed
+  - jekyll-remote-theme
+
+# Menu
+menu:
+  - menu-label: Requirements & Domain
+    menu-url: /rialto/requirements
+  - menu-label: Architecture
+    menu-url: /rialto/architecture
+  - menu-label: Data Models
+    menu-url: /rialto/data-models
+  - menu-label: Implementation(s)
+    menu-url: /rialto/implementation
+  - menu-label: Acceptance Tests
+    menu-url: /rialto/acceptance-tests
+  - menu-label: Influences
+    menu-url: /rialto/influences
+  - menu-label: Glossary
+    menu-url: /rialto/glossary
