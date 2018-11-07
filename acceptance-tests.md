@@ -1,4 +1,8 @@
+---
+layout: default
+---
 
+Note: this is incomplete / WIP.
 
 # Logistics of Acceptance Tests
 
@@ -23,6 +27,7 @@ Uncertain:
 ## Creating an Organization from CAP
 
 1. Put into SPARQL Proxy:
+
 ```
 INSERT DATA {
   <http://example.org/orgs/1234> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://xmlns.com/foaf/0.1/Organization> ;
