@@ -118,7 +118,7 @@ Name      | $.name    | none                | {1,1}
 3. For each organization JSON:
   i. Look-up
   ii. Map
-  
+
 
 ### SERA Grants
 
