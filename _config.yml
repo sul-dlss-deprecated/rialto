@@ -27,11 +27,3 @@ menu:
     menu-url: /rialto/architecture
   - menu-label: Data Models
     menu-url: /rialto/data-models
-  - menu-label: Implementation(s)
-    menu-url: /rialto/implementation
-  - menu-label: Acceptance Tests
-    menu-url: /rialto/acceptance-tests
-  - menu-label: Influences
-    menu-url: /rialto/influences
-  - menu-label: Glossary
-    menu-url: /rialto/glossary
