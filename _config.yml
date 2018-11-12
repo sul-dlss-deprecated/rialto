@@ -7,6 +7,11 @@ show_downloads: true
 project_wiki: https://github.com/sul-dlss/rialto/wiki
 project_issues: https://github.com/sul-dlss/rialto/issues
 
+site:
+  - github:
+    - owner_url: https://github.com/sul-dlss
+    - owner_label: SUL-DLSS
+
 # Build settings
 markdown: kramdown
 remote_theme: cmh2166/minimal-architect
@@ -22,11 +27,5 @@ menu:
     menu-url: /rialto/architecture
   - menu-label: Data Models
     menu-url: /rialto/data-models
-  - menu-label: Implementation(s)
-    menu-url: /rialto/implementation
-  - menu-label: Acceptance Tests
+  - menu-label: Acceptance Criteria
     menu-url: /rialto/acceptance-tests
-  - menu-label: Influences
-    menu-url: /rialto/influences
-  - menu-label: Glossary
-    menu-url: /rialto/glossary
